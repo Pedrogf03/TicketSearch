@@ -4,20 +4,13 @@ require_once 'classes/TicketProviderInterface.php';
 require_once 'classes/VividSeatsProvider.php';
 require_once 'classes/SeatGeekProvider.php';
 
-// Función para determinar el proveedor de la URL
-function getProvider($url) {
-    if (strpos($url, 'vividseats.com') !== false) {
-        return new VividSeatsProvider();
-    } elseif (strpos($url, 'seatgeek.com') !== false) {
-        return new SeatGeekProvider();
-    }
-    return null;
-}
 
 $url = $_GET['url'] ?? '';
 
+// PARA QUE LA APP FUNCIONE ES NECESARIO ACCEDER AL ENLACE Y PASAR EL CAPTCHA
+
 if ($url) {
-    $provider = getProvider($url);
+    $provider = new VividSeatsProvider();
 
     if ($provider) {
         try {
